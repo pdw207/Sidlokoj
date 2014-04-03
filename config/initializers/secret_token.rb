@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Gradoj::Application.config.secret_key_base = '3d38dfc42f7a6dc6401d2924f65b1f36d0f4451c72ad6d0d7d5c58aba3a714c0394e86d8f96b6b249356666492ff5b76b12835962503b2003b17146d480f2555'
+Gradoj::Application.config.secret_key_base = ENV['SECRET_TOKEN']
