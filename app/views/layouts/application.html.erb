@@ -11,6 +11,11 @@
     <%= csrf_meta_tags %>
   </head>
 
+  <header>
+    <%= render 'layouts/navbar' %>
+    <%= render 'layouts/messages' %>
+  </header>
+
   <body>
 
     <%= yield %>

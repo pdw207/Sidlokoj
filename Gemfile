@@ -29,6 +29,7 @@ group :test do
     gem 'capybara'
     gem 'shoulda'
     gem 'launchy'
+    gem 'valid_attribute'
 end
 
 # Use CoffeeScript for .js.coffee assets and views
