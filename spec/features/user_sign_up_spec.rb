@@ -25,7 +25,6 @@ feature 'User Sign Up and Sign In', %q{
     starting_user_count = User.count
 
     user = FactoryGirl.build(:user)
-    save_and_open_page
     sign_up_as(user)
 
     expect(page).to have_content('Awesome. You are now registered. Now you need to create a classroom.')

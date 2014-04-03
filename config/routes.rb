@@ -1,4 +1,4 @@
-Gradoj::Application.routes.draw do
+Sidlokoj::Application.routes.draw do
 
   devise_for :users
   resources :classrooms, only: :index

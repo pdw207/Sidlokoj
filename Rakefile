@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Gradoj::Application.load_tasks
+Sidlokoj::Application.load_tasks
