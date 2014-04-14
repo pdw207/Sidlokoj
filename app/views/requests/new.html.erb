@@ -1,0 +1,14 @@
+<h1>Join a School</h1>
+<p class="center">Being a member of a school allows you access to a pool of students.</p>
+<p class="center">You don't need to be a member of a school and can add students independently.</p>
+<%= simple_form_for @request do |f| %>
+  <%= f.association :principal,
+    collection: User.where(admin: true),
+    label: 'School Principal',
+    label_method: :full_name,
+    include_blank: false %>
+  <footer>
+    <%= f.button :submit, 'Send Request' %>
+<% end %>
+  <p><%= link_to 'Back', root_path %></p>
+  </footer>

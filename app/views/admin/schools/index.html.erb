@@ -1,0 +1,63 @@
+<h1>Principal Home Page</h1>
+
+<% unless @requests.empty? || @requests.nil? %>
+  <h2>Requests</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Teacher</th>
+        <th>Email</th>
+        <th>Last Modified</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+  <% @requests.order(:updated_at).each do |request| %>
+    <tbody>
+      <tr>
+        <td><%= request.teacher.full_name %></td>
+        <td><%= request.teacher.email %></td>
+        <td><%= request.updated_at.strftime("%m/%d/%Y") %></td>
+        <td><%= request.status %></td>
+        <td><%= link_to 'Respond', edit_admin_request_path(request) %></td>
+      </tr>
+    </tbody>
+  <% end %>
+  </table>
+<% end %>
+
+<% unless @schools.empty? %>
+  <h2><%= @schools.count > 1 ? 'Schools': 'School' %></h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Phone</th>
+      </tr>
+    </thead>
+  <% @schools.each do |school| %>
+    <tbody>
+      <tr>
+        <td><%= school.name %></td>
+        <td><%= school.location %></td>
+        <td><%= school.phone_number %></td>
+      </tr>
+    </tbody>
+  <% end %>
+  </table>
+<% end %>
+
+<footer>
+  <p><%= link_to 'New School', new_admin_school_path %></p>
+</footer>
+
+
+
+
+
+
+<h2>Students</h2>
+

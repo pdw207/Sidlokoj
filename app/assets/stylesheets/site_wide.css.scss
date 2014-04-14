@@ -1,0 +1,16 @@
+h2, h1, .center, table, footer {
+  margin: 1em auto;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2{
+  font-size: 1.5em;
+}
+/*Text Algin all Elements in a Table*/
+table thead tr th, table thead tr td, table tfoot tr th, table tfoot tr td{
+  text-align: center;
+}
