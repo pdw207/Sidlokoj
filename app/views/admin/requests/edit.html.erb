@@ -1,0 +1,11 @@
+<h1><%= @request.teacher.full_name %>'s Request on <%= @request.created_at.strftime("%m/%d/%Y") %></h1>
+<p class="center"></p>
+<p class="center"></p>
+  <footer>
+<%= simple_form_for [:admin, @request] do |f| %>
+  <%= f.input :status, label: ' ', required: false, as: :radio_buttons, collection: Request::STATUSES, boolean_style: :inline %>
+  <br>
+  <%= f.button :submit, 'Save' %>
+<% end %>
+  <p><%= link_to 'Back', root_path %></p>
+  </footer>

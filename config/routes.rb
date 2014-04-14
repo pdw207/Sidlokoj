@@ -1,7 +1,16 @@
 Sidlokoj::Application.routes.draw do
 
   devise_for :users
+
   resources :classrooms, only: :index
+
+  resources :requests, only: [:new, :create]
+
+  namespace :admin do
+    resources :schools, only: [:index, :create, :new]
+    resources :requests, only: [:edit, :update]
+  end
+
   root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

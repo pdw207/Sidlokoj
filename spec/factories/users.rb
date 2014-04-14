@@ -5,5 +5,15 @@ FactoryGirl.define do
     last_name 'Boingo'
     sequence(:email) { |n| "oingoboingo#{n}@gmail.com" }
     password '12345678'
+
+    trait :isteacher do
+      admin false
+    end
+    trait :isprincipal do
+      admin true
+    end
+
+    factory :principal, traits: [:isprincipal]
+    factory :teacher, traits: [:isteacher]
   end
 end

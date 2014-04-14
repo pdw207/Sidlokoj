@@ -1,0 +1,10 @@
+<h1>Create a School</h1>
+<%= simple_form_for [:admin, @school] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :location %>
+  <%= f.input :phone_number, label: 'Phone Number' %>
+<footer>
+  <%= f.button :submit,'Create' %>
+  <% end %>
+  <p><%= link_to 'Back', root_path %></p>
+</footer>

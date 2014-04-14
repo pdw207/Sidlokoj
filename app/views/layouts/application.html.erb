@@ -18,7 +18,15 @@
 
   <body>
 
-    <%= yield %>
+  <div class="row">
+    <div class="medium-3 columns"><br></div>
+    <div class="small-12 medium-6 columns">
+      <%= yield %>
+    </div>
+    <div class="medium-3 columns"><br></div>
+  </div>
+
+
     <%= javascript_include_tag "application" %>
   </body>
 </html>

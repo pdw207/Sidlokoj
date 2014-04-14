@@ -16,6 +16,17 @@ describe User do
   end
 
   context 'associations' do
+    it {should have_many :schools}
+    it {belong_to :school}
+    it {should have_many :requests}
+    it {should have_many :submitted_requests}
+  end
+
+  context 'methods' do
+    it 'should have full name' do
+      person = FactoryGirl.build(:user)
+      expect(person.full_name).to eq('Oningo Boingo')
+    end
   end
 
 end
