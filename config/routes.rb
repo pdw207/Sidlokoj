@@ -6,6 +6,10 @@ Sidlokoj::Application.routes.draw do
 
   resources :requests, only: [:new, :create]
 
+  resources :students, only: [:new, :create, :edit, :update]
+
+  resources :courses, only: [:new, :create, :edit, :update]
+
   namespace :admin do
     resources :schools, only: [:index, :create, :new]
     resources :requests, only: [:edit, :update]

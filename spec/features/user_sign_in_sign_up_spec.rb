@@ -21,15 +21,14 @@ feature 'User Sign Up and Sign In', %q{
   scenario 'an unregistered user completes sign_up form' do
 
     starting_user_count = User.count
-    user = FactoryGirl.build(:teacher)
     visit root_path
     click_link 'Sign Up'
-    fill_in 'First Name', with: user.first_name
-    fill_in 'Last Name', with: user.last_name
-    fill_in 'Email', with: user.email
+    fill_in 'First Name', with: "Mary"
+    fill_in 'Last Name', with: "Undershill"
+    fill_in 'Email', with: "undershill@gmail.com"
     choose('Teacher')
-    fill_in 'user_password', with: user.password
-    fill_in 'user_password_confirmation', with: user.password
+    fill_in 'user_password', with: "12345678"
+    fill_in 'user_password_confirmation', with: "12345678"
     click_button 'Sign Up'
 
     expect(page).to have_content('Awesome. You are now registered. Now you need to create a classroom.')
@@ -84,7 +83,7 @@ feature 'User Sign Up and Sign In', %q{
   # Secure Pages
   scenario 'an unregistered user attempts to access a restricted page' do
 
-    visit classrooms_path
+    visit root_path
     expect(page).to have_content('You need to sign in or sign up before continuing')
 
   end

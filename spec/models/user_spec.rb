@@ -20,12 +20,13 @@ describe User do
     it {belong_to :school}
     it {should have_many :requests}
     it {should have_many :submitted_requests}
+    it{ should have_many(:courses)}
   end
 
   context 'methods' do
     it 'should have full name' do
-      person = FactoryGirl.build(:user)
-      expect(person.full_name).to eq('Oningo Boingo')
+      person = FactoryGirl.build(:user, first_name: 'Joe', last_name: 'Blow')
+      expect(person.full_name).to eq("Joe Blow")
     end
   end
 

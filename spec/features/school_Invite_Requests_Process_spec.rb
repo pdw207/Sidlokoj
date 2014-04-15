@@ -1,15 +1,14 @@
 require 'spec_helper'
 
-feature 'Prinicipal Manages a School', %q{
+feature 'School Invite Requests', %q{
   I am a Principal
   who wants to limit which teachers can
-  access students from a specific school
+  access a specific school
   to ensure student privacy.} do
 
   # Acceptance Criteria
-  # * As a principal I am a user that has one school.
+  # * As a principal that serves as an admin for a school an can accept teacher join requests
   # * A principal may invite teachers to join the school that are already in the system
-  # * All students in a school will be available to all teachers that are members of that school.
 
   scenario 'A Principal can create a School' do
 
@@ -51,7 +50,6 @@ feature 'Prinicipal Manages a School', %q{
     # Create 1 entry connected to a principal
     principal = FactoryGirl.create(:principal)
     school = FactoryGirl.create_list(:school, 10, location: 'Earth', principal: principal )
-    # principal.schools << school
 
     # Of 21 schools the principal has only 1
     expect(School.count).to eq(30)
@@ -79,14 +77,12 @@ feature 'Prinicipal Manages a School', %q{
   scenario 'Teacher can request to join a school' do
 
     # Create 1 school connected to a principal
-    principal = FactoryGirl.create(:user, first_name: 'Captain', last_name: 'Planet' ,admin: true)
-    principal.schools << FactoryGirl.create(:school, name: 'Washington Avenue')
-    principal.save
+    school = FactoryGirl.create(:school, name: 'Washington Avenue')
+    principal = school.principal
 
     # Create 1 school already connected to the teacher
-    teacher = FactoryGirl.create(:user)
+    teacher = FactoryGirl.create(:teacher)
     teacher.schools << FactoryGirl.create(:school, name: 'Newton South')
-    teacher.save
 
     sign_in_as(teacher)
 
@@ -97,7 +93,7 @@ feature 'Prinicipal Manages a School', %q{
     # Lets add the new school
     click_link 'Join a School'
 
-    select('Captain Planet', :from => 'School Principal')
+    select(principal.full_name, :from => 'School Principal')
     click_button 'Send Request'
 
     # Home page should now have 1 schools and 1 request open
@@ -131,10 +127,9 @@ feature 'Prinicipal Manages a School', %q{
     expect(page).to have_content('Pending')
     choose('Approved')
     click_button 'Save'
-    save_and_open_page
 
     expect(page).to have_content('Thank you for your response.')
-    expect(page).to have_content('Jerry')
+    # expect(current_path).to eq(admin_schools_path)
     expect(page).to have_content('Approved')
   end
 

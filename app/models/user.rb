@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   has_many :schools, foreign_key: "principal_id"
   belongs_to :school
+  has_many :courses, foreign_key: "teacher_id"
   has_many :submitted_requests, foreign_key: 'teacher_id', class_name: 'Request'
   has_many :requests, foreign_key: 'principal_id'
 

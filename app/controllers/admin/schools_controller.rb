@@ -14,6 +14,7 @@ class Admin::SchoolsController < ApplicationController
 
   def create
     @school = School.new(school_params)
+    @school.principal = current_user
     if @school.save
       redirect_to admin_schools_path, notice: 'You have setup a School. Now Add Students.'
     else
@@ -24,9 +25,7 @@ class Admin::SchoolsController < ApplicationController
   private
 
   def school_params
-    school_params = params.require(:school).permit(:name, :location, :phone_number, :principal)
-    user_id = {"principal_id" => current_user.id}
-    user_id.merge(school_params)
+    school_params = params.require(:school).permit(:name, :location, :phone_number)
   end
 
   def authorize_principal

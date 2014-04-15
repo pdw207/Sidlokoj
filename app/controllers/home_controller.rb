@@ -6,6 +6,8 @@ class HomeController < ApplicationController
   def index
     @schools = current_user.schools
     @requests = current_user.submitted_requests
+    @courses = current_user.courses
+
   end
 
   def route_principal_to_admin_page
