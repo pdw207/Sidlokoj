@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
     format: { with: PASSWORD_REGEX, message: "Not a valid email" }
 
   has_many :schools, foreign_key: "principal_id"
+
   belongs_to :school
   has_many :courses, foreign_key: "teacher_id"
   has_many :submitted_requests, foreign_key: 'teacher_id', class_name: 'Request'

@@ -1,21 +1,32 @@
 <h1>Create a New Class</h1>
 
 <%= simple_form_for @course do |f| %>
-  <div cass="row">
-    <div class="small-0 large-12 columns">
+  <div class="row">
+    <div class="small-12 columns">
       <%= f.input :subject%>
     </div>
   </div>
-  <div cass="row">
-    <div class="small-0 large-6 columns">
+
+  <div class="row">
+    <div class="small-12 columns">
       <%= f.input :school_year, label: "School Year" %>
     </div>
-    <div class="small-0 large-6 columns">
+    <div class="small-12 columns">
       <%= f.input :period %>
     </div>
   </div>
-  <%= f.input :start_date, label: "Start"%>
-  <%= f.input :end_date, label: "End" %>
+
+  <div class="row">
+    <div class="small-12 columns center">
+      <%= f.input :start_date, label: "Start", input_html: {class: "small-3 columns spacer"}%>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-12 columns center">
+      <%= f.input :end_date, label: "End", input_html: {class: "small-3 columns spacer"} %>
+    </div>
+  </div>
 
 <footer>
   <%= f.button :submit, "Create" %>
