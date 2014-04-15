@@ -32,7 +32,7 @@ feature 'School Invite Requests', %q{
 
     initial_school_count = School.count
 
-    sign_in_as(FactoryGirl.create(:user, admin: true))
+    sign_in_as(FactoryGirl.create(:principal))
 
     visit admin_schools_path
     click_link 'New School'
@@ -42,27 +42,6 @@ feature 'School Invite Requests', %q{
     expect(page).to have_content("can't be blank")
   end
 
-  scenario 'A Prinicipal can view only schools they manage' do
-
-    # Create 20 schools
-    FactoryGirl.create_list(:school, 20, location: 'Mars')
-
-    # Create 1 entry connected to a principal
-    principal = FactoryGirl.create(:principal)
-    school = FactoryGirl.create_list(:school, 10, location: 'Earth', principal: principal )
-
-    # Of 21 schools the principal has only 1
-    expect(School.count).to eq(30)
-    expect(principal.schools.count).to eq(10)
-
-    sign_in_as(principal)
-    visit admin_schools_path
-
-    expect(page).to have_content('Earth')
-    expect(page).to_not have_content('Mars')
-
-
-  end
 
   scenario 'A Teacher can not create a School' do
      sign_in_as(FactoryGirl.create(:teacher))
@@ -70,8 +49,27 @@ feature 'School Invite Requests', %q{
      expect(page).to have_content('Access Denied')
   end
 
-  scenario "A Principal can edit a school's information" do
+  scenario "A Principal can edit school information" do
 
+    school = FactoryGirl.create(:school)
+    sign_in_as(FactoryGirl.create(:principal))
+    visit edit_admin_school_path(school)
+    fill_in 'Phone Number', with: '605-345-1254'
+    click_button 'Update'
+
+    expect(page).to have_content('Your update has been saved.')
+  end
+
+  scenario "A Principal can make a mistake editing school information" do
+
+    school = FactoryGirl.create(:school)
+    sign_in_as(FactoryGirl.create(:principal))
+
+    visit edit_admin_school_path(school)
+    fill_in 'Name', with: ''
+    click_button 'Update'
+
+    expect(page).to have_content('There is an error with your form.')
   end
 
   scenario 'Teacher can request to join a school' do
@@ -80,25 +78,12 @@ feature 'School Invite Requests', %q{
     school = FactoryGirl.create(:school, name: 'Washington Avenue')
     principal = school.principal
 
-    # Create 1 school already connected to the teacher
-    teacher = FactoryGirl.create(:teacher)
-    teacher.schools << FactoryGirl.create(:school, name: 'Newton South')
-
-    sign_in_as(teacher)
-
-    # Home page should have only current school listed
-    expect(page).to have_content('Newton South')
-    expect(page).to_not have_content('Washington Avenue')
+    sign_in_as(FactoryGirl.create(:teacher))
 
     # Lets add the new school
-    click_link 'Join a School'
-
+    visit new_request_path
     select(principal.full_name, :from => 'School Principal')
     click_button 'Send Request'
-
-    # Home page should now have 1 schools and 1 request open
-    expect(page).to have_content('Newton South')
-    expect(page).to have_content('Washington Avenue')
 
     expect(page).to have_content('Your request has been sent to the Principal for approval')
 
@@ -123,7 +108,6 @@ feature 'School Invite Requests', %q{
     # Sign into Principal and Approve the request
     sign_in_as(principal)
     visit edit_admin_request_path(Request.last.id)
-    expect(page).to have_content('Jerry')
     expect(page).to have_content('Pending')
     choose('Approved')
     click_button 'Save'

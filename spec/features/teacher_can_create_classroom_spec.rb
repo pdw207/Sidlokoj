@@ -81,7 +81,9 @@ feature 'Adding Students and Classrooms', %q{
 
     visit new_student_path
 
-    select teacher.school.name, from: 'School'
+    random_school = teacher.schools.first
+
+    select random_school, from: 'School'
     fill_in 'First Name', with: "Bob"
     fill_in 'Last Name', with: "Smith"
     fill_in 'Nickname', with: "Bobby"

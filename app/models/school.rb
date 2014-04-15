@@ -5,5 +5,7 @@ class School < ActiveRecord::Base
 
   belongs_to :principal, class_name: 'User'
   has_many :students
-  has_many :teachers, foreign_key: "teacher_id", class_name: 'User'
+  has_many :teacher_assignments
+  has_many :teachers, through: :teacher_assignments
+
 end

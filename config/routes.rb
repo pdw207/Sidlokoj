@@ -2,8 +2,6 @@ Sidlokoj::Application.routes.draw do
 
   devise_for :users
 
-  resources :classrooms, only: :index
-
   resources :requests, only: [:new, :create]
 
   resources :students, only: [:new, :create, :edit, :update]
@@ -11,7 +9,7 @@ Sidlokoj::Application.routes.draw do
   resources :courses, only: [:new, :create, :edit, :update]
 
   namespace :admin do
-    resources :schools, only: [:index, :create, :new]
+    resources :schools, only: [:index, :create, :new, :edit, :update]
     resources :requests, only: [:edit, :update]
   end
 

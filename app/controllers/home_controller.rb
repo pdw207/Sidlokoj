@@ -4,10 +4,10 @@ class HomeController < ApplicationController
   before_action :route_principal_to_admin_page
 
   def index
-    @school = current_user.school
+    @schools = current_user.schools
+    @student_pool = current_user.student_pool
     @requests = current_user.submitted_requests
     @courses = current_user.courses
-    binding.pry
 
   end
 

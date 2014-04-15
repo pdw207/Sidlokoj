@@ -13,11 +13,11 @@ FactoryGirl.define do
         student_count 5
       end
 
-
       after(:create) do |school, evaluator|
         create_list(:student, evaluator.student_count, school: school)
       end
-  end
+
+    end
 
   end
 end
