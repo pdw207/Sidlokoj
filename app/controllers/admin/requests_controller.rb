@@ -8,10 +8,12 @@ class Admin::RequestsController < ApplicationController
 
   def update
     @request =  Request.find(params[:id])
-    @request.update(request_params)
 
-    if @request.save
-      redirect_to admin_schools_path, notice: 'Thank you for your response.'
+    if @request.update(request_params)
+      #If request is approved assigns school to teacher
+      @request.toggle_school
+
+      redirect_to admin_home_index_path, notice: 'Thank you for your response.'
     else
       flash.now[:warning] = 'Please review the information. The response has not finished.'
       render 'edit'

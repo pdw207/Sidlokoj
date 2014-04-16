@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140414164822) do
+ActiveRecord::Schema.define(version: 20140415183707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "courses", force: true do |t|
+    t.string   "subject",                        null: false
+    t.integer  "teacher_id"
+    t.string   "status",      default: "Active", null: false
+    t.string   "school_year"
+    t.integer  "period"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "courses", ["teacher_id"], name: "index_courses_on_teacher_id", using: :btree
 
   create_table "requests", force: true do |t|
     t.integer  "teacher_id"
@@ -50,6 +64,13 @@ ActiveRecord::Schema.define(version: 20140414164822) do
 
   add_index "students", ["first_name"], name: "index_students_on_first_name", using: :btree
 
+  create_table "teacher_assignments", force: true do |t|
+    t.integer  "teacher_id"
+    t.integer  "school_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -66,13 +87,9 @@ ActiveRecord::Schema.define(version: 20140414164822) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin",                  default: false
-    t.integer  "school_id"
-    t.integer  "teacher_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["school_id"], name: "index_users_on_school_id", using: :btree
-  add_index "users", ["teacher_id"], name: "index_users_on_teacher_id", using: :btree
 
 end

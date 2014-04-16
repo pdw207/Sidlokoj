@@ -14,19 +14,35 @@ class Admin::SchoolsController < ApplicationController
 
   def create
     @school = School.new(school_params)
+    @school.principal = current_user
     if @school.save
-      redirect_to admin_schools_path, notice: 'You have setup a School. Now Add Students.'
+      redirect_to admin_home_index_path, notice: 'You have successfully setup a new School.'
     else
       render 'new'
     end
   end
 
+  def edit
+    @school =  School.find(params[:id])
+  end
+
+  def update
+    @school =  School.find(params[:id])
+
+    if @school.update(school_params)
+      redirect_to admin_home_index_path, notice: 'Your update has been saved.'
+    else
+      flash.now[:warning] = 'There is an error with your form.'
+      render 'edit'
+    end
+  end
+
+
+
   private
 
   def school_params
-    school_params = params.require(:school).permit(:name, :location, :phone_number, :principal)
-    user_id = {"principal_id" => current_user.id}
-    user_id.merge(school_params)
+    school_params = params.require(:school).permit(:id, :name, :location, :phone_number)
   end
 
   def authorize_principal

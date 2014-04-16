@@ -8,7 +8,7 @@ class RequestsController < ApplicationController
 
   def create
     @request = Request.new(request_params)
-    @request.teacher = current_user
+
     if @request.save
       redirect_to root_path, notice: 'Your request has been sent to the Principal for approval'
     else
@@ -20,6 +20,6 @@ class RequestsController < ApplicationController
   private
 
   def request_params
-    params.require(:request).permit(:principal_id)
+    params.require(:request).permit(:principal_id).merge(teacher: current_user)
   end
 end

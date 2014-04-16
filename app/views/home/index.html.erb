@@ -1,52 +1,13 @@
 
 
-<h1>Hey <%= current_user.admin? ? 'Principal' : 'Teacher' %></h1>
+<h1>Hey Teach</h1>
 
 
-<% unless @schools.empty? %>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Location</th>
-      <th>Phone</th>
-    </tr>
-  </thedd>
-  <% @schools.each do |school| %>
-  <tr>
-    <td><%= school.name %></td>
-    <td><%= school.location %></td>
-    <td><%= school.phone_number %></td>
-  </tr>
-  <% end %>
-</table>
-<% end %>
 
-<% unless @requests.empty? %>
-  <h2>Schools</h2>
-  <table>
-  <tr>
-    <td>Name</td>
-    <td>Location</td>
-    <td>Created</td>
-    <td>Status</td>
-  </tr>
-  <% @requests.each do |request| %>
-    <% request.principal.schools.each do |school| %>
-      <tr>
-        <td><%= school.name %></td>
-        <td><%= school.location%></td>
-        <td><%= request.created_at.strftime("%m/%d/%Y") %></td>
-        <td><%= request.status %> by <%= request.principal.full_name %></td>
-      </tr>
-    <% end %>
-  <% end %>
-  </table>
-<% end %>
+<%= render 'home/schools' %>
 
+<%= render 'home/requests' %>
 
-<br>
-<footer>
-  <%= link_to 'Request to Join a School', new_request_path unless current_user.admin %>
-  <%= link_to 'Create a School', new_admin_school_path if current_user.admin %>
-</footer>
+<%= render 'home/courses' %>
+
+<%= render 'home/students' %>

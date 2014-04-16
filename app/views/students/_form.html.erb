@@ -1,0 +1,28 @@
+<%= simple_form_for @student do |f| %>
+  <div class="row">
+    <div class="small-0 large-6 columns">
+      <%= f.input :first_name, label: 'First Name' %>
+    </div>
+    <div class="small-0 large-6 columns">
+      <%= f.input :last_name, label: 'Last Name' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-0 large-6 columns">
+      <%= f.input :nickname %>
+    </div>
+    <div class="small-0 large-6 columns">
+      <%= f.input :dob, label: 'Date of Birth' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-0 large-12 columns">
+      <%= f.association :school,
+    include_blank: false  %>
+    </div>
+  </div>
+<footer>
+  <%= f.button :submit, "Submit" %>
+<% end %>
+  <p><%= link_to 'Back', root_path %></p>
+</footer>

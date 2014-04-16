@@ -1,0 +1,15 @@
+<h1>Edit an Existing Class</h1>
+
+<%= simple_form_for @course do |f| %>
+  <%= f.input :subject%>
+  <%= f.input :school_year, label: "School Year" %>
+  <%= f.input :period %>
+  <%= f.input :start_date, label: "Start" %>
+  <%= f.input :end_date, label: "End" %>
+  <%= f.input :status, collection: Course::STATUSES, :include_blank => false %>
+
+<footer>
+  <%= f.button :submit, "Modify" %>
+<% end %>
+  <p><%= link_to 'Back', root_path %></p>
+</footer>

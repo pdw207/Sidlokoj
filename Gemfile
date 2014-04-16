@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.4'
 
@@ -25,11 +26,16 @@ group :development, :test do
     gem 'quiet_assets'
     gem 'factory_girl_rails'
 end
+
 group :test do
     gem 'capybara'
     gem 'shoulda'
     gem 'launchy'
     gem 'valid_attribute'
+end
+
+group :production do
+    gem 'rails_12factor'
 end
 
 # Use CoffeeScript for .js.coffee assets and views

@@ -13,13 +13,33 @@ class User < ActiveRecord::Base
   validates :email,
     format: { with: PASSWORD_REGEX, message: "Not a valid email" }
 
-  has_many :schools, foreign_key: "principal_id"
-  belongs_to :school
+  # Principal is in charge of a school
+  has_one :principal_school, class_name: 'School', foreign_key: 'principal_id'
+
+  # Teacher can have one or more schools
+  has_many :teacher_assignments, foreign_key: "teacher_id"
+  has_many :schools, through: :teacher_assignments
+
+
+  has_many :courses, foreign_key: "teacher_id"
+
+  # Requests are submitted by a teacher to a Principal
   has_many :submitted_requests, foreign_key: 'teacher_id', class_name: 'Request'
   has_many :requests, foreign_key: 'principal_id'
 
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def student_pool
+    pool = []
+
+    schools.each do |school|
+      pool << school.students
+    end
+    binding.pry
+    pool
+  end
+
 end
 

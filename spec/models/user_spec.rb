@@ -16,16 +16,33 @@ describe User do
   end
 
   context 'associations' do
-    it {should have_many :schools}
-    it {belong_to :school}
+
+    it {should have_one :principal_school}# As principal
+    it {should have_many :schools} #As teacher
+
     it {should have_many :requests}
     it {should have_many :submitted_requests}
+    it{ should have_many(:courses)}
   end
 
   context 'methods' do
     it 'should have full name' do
-      person = FactoryGirl.build(:user)
-      expect(person.full_name).to eq('Oningo Boingo')
+      person = FactoryGirl.build(:user, first_name: 'Joe', last_name: 'Blow')
+      expect(person.full_name).to eq("Joe Blow")
+    end
+
+    it 'should have a student pool ' do
+      pool = FactoryGirl.create_list(:student, 3)
+      teacher = FactoryGirl.create(:teacher)
+
+      pool.each do |student|
+        teacher.schools << student.school
+
+      end
+
+      expect(teacher.student_pool.count).to eq(3)
+
+
     end
   end
 
