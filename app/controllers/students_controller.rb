@@ -1,13 +1,15 @@
 class StudentsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @student_pool = current_user.student_pool
+  end
   def new
     @student = Student.new
   end
 
   def create
     @student = Student.new(student_params)
-    binding.pry
     if @student.save
       redirect_to new_student_path, notice: 'You have Successfully added a Student. Add another.'
     else
@@ -25,7 +27,7 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
 
     if @student.update(student_params)
-      redirect_to root_path, notice: 'Updated the student file.'
+      redirect_to students_path, notice: 'Updated the student file.'
     else
       flash.now[:warning] = 'Take a look at your  edit again.'
       render 'edit'

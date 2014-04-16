@@ -4,7 +4,7 @@ Sidlokoj::Application.routes.draw do
 
   resources :requests, only: [:new, :create]
 
-  resources :students, only: [:new, :create, :edit, :update]
+  resources :students, only: [:new, :create, :edit, :update, :index]
 
   resources :courses, only: [:new, :create, :edit, :update]
 

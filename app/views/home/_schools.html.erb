@@ -1,13 +1,6 @@
 <% unless @schools.empty? %>
-<h2>Schools</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Location</th>
-      <th>Phone</th>
-    </tr>
-  </thedd>
+<table class="informational">
+
   <% @schools.each do |school| %>
   <tr>
     <td><%= school.name %></td>
@@ -17,7 +10,4 @@
   <% end %>
 </table>
 <% end %>
-<br>
-<footer>
-  <%= link_to 'Create a School', new_admin_school_path if current_user.admin %>
-</footer>
+

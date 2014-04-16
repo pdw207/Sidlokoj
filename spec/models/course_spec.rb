@@ -14,6 +14,22 @@ describe Course do
 
   context 'associations' do
     it{ should belong_to(:teacher)}
+  end
+
+  context 'methods' do
+
+    it 'displays active courses' do
+      inactive_course = FactoryGirl.build(:course, status: "Inactive")
+      active_course = FactoryGirl.build(:course, status: "Active")
+
+      # Create a user and pass in some courses
+      teacher = FactoryGirl.create(:teacher)
+      teacher.courses << active_course
+      teacher.courses << inactive_course
+
+      expect(Course.active_courses_for(teacher)).to eq([active_course])
+
+    end
 
   end
 

@@ -37,13 +37,23 @@ describe User do
 
       pool.each do |student|
         teacher.schools << student.school
-
       end
 
       expect(teacher.student_pool.count).to eq(3)
+    end
 
+    it 'should list schools that they are not members of' do
+      teacher = FactoryGirl.create(:teacher)
+      member_school = FactoryGirl.create(:school)
+      new_school = FactoryGirl.create(:school)
+
+      # Teacher is a member of only one school
+      teacher.schools << member_school
+
+      expect(teacher.available_school_principals).to eq([new_school.principal])
 
     end
+
   end
 
 end

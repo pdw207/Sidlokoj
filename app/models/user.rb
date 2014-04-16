@@ -37,9 +37,14 @@ class User < ActiveRecord::Base
     schools.each do |school|
       pool << school.students
     end
-    binding.pry
     pool
   end
 
+  def available_school_principals
+    existing_principals = self.schools.map{|school| school.principal}
+    all_principals = User.where(admin: true)
+    all_principals -= existing_principals
+
+  end
 end
 
