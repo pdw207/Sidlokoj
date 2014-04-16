@@ -16,7 +16,7 @@ class Admin::SchoolsController < ApplicationController
     @school = School.new(school_params)
     @school.principal = current_user
     if @school.save
-      redirect_to admin_schools_path, notice: 'You have setup a School. Now Add Students.'
+      redirect_to admin_home_index_path, notice: 'You have successfully setup a new School.'
     else
       render 'new'
     end
@@ -30,7 +30,7 @@ class Admin::SchoolsController < ApplicationController
     @school =  School.find(params[:id])
 
     if @school.update(school_params)
-      redirect_to admin_schools_path, notice: 'Your update has been saved.'
+      redirect_to admin_home_index_path, notice: 'Your update has been saved.'
     else
       flash.now[:warning] = 'There is an error with your form.'
       render 'edit'

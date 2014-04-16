@@ -1,0 +1,25 @@
+<% if @school.nil? %>
+  <footer>
+    <p><%= link_to 'New School', new_admin_school_path %></p>
+  </footer>
+<% else %>
+  <h2>Basic School Information</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Phone</th>
+        <th>Teachers</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= link_to @school.name, edit_admin_school_path(@school) %></td>
+        <td><%= link_to @school.location, edit_admin_school_path(@school)  %></td>
+        <td><%= link_to @school.phone_number, edit_admin_school_path(@school)  %></td>
+        <td><%= @school.teachers.count %></td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>

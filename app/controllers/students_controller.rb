@@ -7,6 +7,7 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.new(student_params)
+    binding.pry
     if @student.save
       redirect_to new_student_path, notice: 'You have Successfully added a Student. Add another.'
     else
@@ -35,6 +36,6 @@ class StudentsController < ApplicationController
   private
 
   def student_params
-    params.require(:student).permit(:id, :first_name, :last_name, :nickname, :dob, :school)
+    params.require(:student).permit(:id, :first_name, :last_name, :nickname, :dob, :school_id)
   end
 end

@@ -1,0 +1,19 @@
+<% unless @student_pool.empty? %>
+  <h2>Students</h2>
+  <table>
+  <tr>
+    <td>First Name</td>
+    <td>Last Name</td>
+    <td>Nickname</td>
+  </tr>
+  <% @student_pool.each do |student| %>
+      <tr>
+
+      </tr>
+  <% end %>
+  </table>
+<% end %>
+<br>
+<footer>
+  <%= link_to 'Add Student', new_student_path%>
+</footer>

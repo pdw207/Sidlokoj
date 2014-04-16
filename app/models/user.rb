@@ -33,9 +33,11 @@ class User < ActiveRecord::Base
 
   def student_pool
     pool = []
+
     schools.each do |school|
       pool << school.students
     end
+    binding.pry
     pool
   end
 

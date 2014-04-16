@@ -18,4 +18,5 @@ describe School do
     it{ should have_many(:teachers)}
   end
 
+
 end

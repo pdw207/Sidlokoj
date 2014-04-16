@@ -1,10 +1,8 @@
-<h1>Principal Home Page</h1>
-
 <% unless @requests.empty? || @requests.nil? %>
   <h2>Requests</h2>
 
   <table>
-    <thead>
+    <thead
       <tr>
         <th>Teacher</th>
         <th>Email</th>
@@ -26,38 +24,3 @@
   <% end %>
   </table>
 <% end %>
-
-<% unless @schools.empty? %>
-  <h2><%= @schools.count > 1 ? 'Schools': 'School' %></h2>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Location</th>
-        <th>Phone</th>
-      </tr>
-    </thead>
-  <% @schools.each do |school| %>
-    <tbody>
-      <tr>
-        <td><%= school.name %></td>
-        <td><%= school.location %></td>
-        <td><%= school.phone_number %></td>
-      </tr>
-    </tbody>
-  <% end %>
-  </table>
-<% end %>
-
-<footer>
-  <p><%= link_to 'New School', new_admin_school_path %></p>
-</footer>
-
-
-
-
-
-
-<h2>Students</h2>
-

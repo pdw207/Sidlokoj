@@ -8,19 +8,6 @@ FactoryGirl.define do
 
     trait :isteacher do
       admin false
-
-          factory :user_with_schools do
-
-      ignore do
-        school_count 5
-      end
-
-
-      after(:create) do |user, evaluator|
-        create_list(:school, evaluator.school_count, user: user)
-      end
-  end
-
     end
     trait :isprincipal do
       admin true

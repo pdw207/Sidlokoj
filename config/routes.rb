@@ -11,6 +11,7 @@ Sidlokoj::Application.routes.draw do
   namespace :admin do
     resources :schools, only: [:index, :create, :new, :edit, :update]
     resources :requests, only: [:edit, :update]
+    resources :home, only: [:index]
   end
 
   root 'home#index'

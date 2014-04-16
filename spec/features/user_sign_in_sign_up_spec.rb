@@ -91,14 +91,14 @@ feature 'User Sign Up and Sign In', %q{
   scenario 'an unauthorized user attempts to acess a restricted page' do
      teacher = FactoryGirl.create(:teacher)
      sign_in_as(teacher)
-     visit admin_schools_path
+     visit admin_home_index_path
      expect(page).to have_content('Access Denied')
   end
 
   scenario 'an authorized user successfully accesses restricted page' do
     principal = FactoryGirl.create(:principal)
     sign_in_as(principal)
-    visit admin_schools_path
-    expect(page).to have_content('Home')
+    visit admin_home_index_path
+    expect(page).to have_content("Principal #{principal.last_name}")
   end
 end

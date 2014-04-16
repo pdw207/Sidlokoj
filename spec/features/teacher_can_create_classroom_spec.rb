@@ -77,13 +77,12 @@ feature 'Adding Students and Classrooms', %q{
   scenario 'teacher can create a new student Successfully' do
 
     teacher = FactoryGirl.create(:teacher)
+    school = FactoryGirl.create(:school)
+    teacher.schools << school
     sign_in_as(teacher)
 
     visit new_student_path
-
-    random_school = teacher.schools.first
-
-    select random_school, from: 'School'
+    select school.name, from: 'School'
     fill_in 'First Name', with: "Bob"
     fill_in 'Last Name', with: "Smith"
     fill_in 'Nickname', with: "Bobby"

@@ -5,12 +5,14 @@
     <td>Name</td>
     <td>School Year</td>
     <td>Period</td>
+    <td>Action</td>
   </tr>
   <% @courses.each do |course| %>
       <tr>
-        <td><%= course.subject unless  course.subject.nil?  %></td>
-        <td><%= course.school_year unless  course.school_year.nil?  %> </td>
-        <td><%= course.period unless  course.period.nil?  %> </td>
+        <td><%= link_to course.subject || "", edit_course_path(course) %></td>
+        <td><%= link_to course.school_year || "", edit_course_path(course) %> </td>
+        <td><%= link_to course.period || "", edit_course_path(course)  %> </td>
+        <td><%= link_to 'edit', edit_course_path(course)  %> </td>
       </tr>
   <% end %>
   </table>
