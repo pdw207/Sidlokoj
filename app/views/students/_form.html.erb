@@ -21,6 +21,11 @@
     include_blank: false  %>
     </div>
   </div>
+  <div class="row">
+    <div class="small-0 large-12 columns">
+      <%= f.input :student_photo, label: "Student Photo", input_html: {class: 'file-picker button'} %>
+    </div>
+  </div>
 <footer>
   <%= f.button :submit, "Submit" %>
 <% end %>

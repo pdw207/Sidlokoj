@@ -10,6 +10,12 @@
 # Ignore private file
 /config/initializers/.secret.rb
 
+#File uploads
+/public/uploads
+
+#Ignore my super secret files!!!
+.env
+
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp

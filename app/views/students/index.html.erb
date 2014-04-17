@@ -1,21 +1,21 @@
 <%unless @student_pool.empty?%>
-  <table>
-  <tr>
-    <td>First Name</td>
-    <td>Last Name</td>
-    <td>Nickname</td>
-  </tr>
-  <% @student_pool.first.each do |student| %>
-      <tr>
-        <td><%= link_to student.first_name, edit_student_path(student)%></td>
-        <td><%= link_to student.last_name, edit_student_path(student) %></td>
-        <td><%= link_to student.nickname, edit_student_path(student)%></td>
 
-      </tr>
-  <% end %>
-  </table>
+  <h1>Students</h1>
+
+  <footer>
+    <%= link_to 'Add Student', new_student_path%>
+  </footer>
+
+  <ul id="student-list">
+    <% @student_pool.first.each do |student| %>
+      <li>
+          <div class='student-photo'>
+            <%= image_tag student.student_photo.url %>
+          </div>
+          <h2 class='student-name'>
+            <%= link_to short_name(student), edit_student_path(student)%>
+          </h2>
+      </li>
+    <% end %>
+  </ul>
 <% end %>
-<br>
-<footer>
-  <%= link_to 'Add Student', new_student_path%>
-</footer>
