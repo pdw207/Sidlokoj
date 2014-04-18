@@ -23,11 +23,24 @@
   </div>
   <div class="row">
     <div class="small-0 large-12 columns">
-      <%= f.input :student_photo, label: "Student Photo", input_html: {class: 'file-picker button'} %>
+
+      <%= f.input :student_photo, label: "Upload Student Photo", input_html: {onchange:"readURL(this);"} %>
     </div>
   </div>
+
 <footer>
+      <img id="img_prev" class=".student-photo img" src="<%=  %>" alt="Preview" />
+<br>
+
+<br>
+
   <%= f.button :submit, "Submit" %>
 <% end %>
   <p><%= link_to 'Back', root_path %></p>
 </footer>
+
+
+
+
+
+
