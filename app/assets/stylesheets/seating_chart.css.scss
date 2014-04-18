@@ -1,0 +1,39 @@
+ #student-list{
+  li{
+    list-style-type: none;
+    width:200px;
+    text-align: center;
+    margin: 0 auto;
+  }
+}
+
+.student-photo img{
+  border-radius: 160px;
+  width: 270px;
+}
+
+.student-name{
+  text-align: center;
+}
+
+input[type="file"]{
+  display: none;
+}
+
+label.file.optional.control-label{
+ background-color: #008cba;
+ text-align: center;
+ vertical-align: middle;
+ color: white;
+ height: 53px;
+ -webkit-transition: background-color 300ms ease-out;
+ transition: background-color 300ms ease-out;
+ font-size: 1rem;
+ line-height: 50px;
+
+ &:hover{
+ background-color: #007095;
+ }
+}
+
+

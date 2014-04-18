@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title><%= content_for?(:title) ? yield(:title) : "Sidlokoj" %></title>
 
     <%= stylesheet_link_tag    "application" %>
@@ -19,11 +18,11 @@
   <body>
 
   <div class="row">
-    <div class="medium-3 columns"><br></div>
-    <div class="small-12 medium-6 columns">
+    <div class="small-2 columns"><br></div>
+    <div class="small-8 columns">
       <%= yield %>
     </div>
-    <div class="medium-3 columns"><br></div>
+    <div class="small-2 columns"><br></div>
   </div>
 
 

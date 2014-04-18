@@ -1,2 +1,6 @@
 == README
 
+Seating Application
+
+Teacher can upload students with photos and arrange them in a classroom.
+
