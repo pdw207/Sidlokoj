@@ -1,21 +1,40 @@
+
+
 <%unless @student_pool.empty?%>
 
   <h1>Students</h1>
 
-  <footer>
-    <%= link_to 'Add Student', new_student_path%>
-  </footer>
+  <div class="row">
+    <div class="small-centered columns" style="text-align:center;">
+      <h2><%= link_to 'Add Student', new_student_path%></h2>
+    </div>
+  </div>
+
 
   <ul id="student-list">
-    <% @student_pool.first.each do |student| %>
-      <li>
-          <div class='student-photo'>
-            <%= image_tag student.student_photo.url %>
-          </div>
-          <h2 class='student-name'>
-            <%= link_to short_name(student), edit_student_path(student)%>
-          </h2>
-      </li>
-    <% end %>
+
+  <!-- Cycle through the pool for every three students creating a new row -->
+  <% (@student_pool.count / 3+1).times do |i|%>
+    <div class="row">
+
+      <!-- take another 3 students and display photo and name -->
+      <% @student_pool.order(:first_name).offset(i*3).limit(3).each do |student| %>
+        <div class= "medium-4  columns">
+          <li class="student">
+              <div class='student-photo'>
+                <%= link_to edit_student_path(student)  do %>
+                 <%= image_tag student.student_photo.url %>
+                <% end %>
+              </div>
+              <h2 class='student-name'><%=short_name(student)%></h2>
+          </li>
+        </div>
+        <!-- If doesn't complete a row just add a filler to float last student left -->
+        <% if @student_pool.order(:first_name).last == student && @student_pool.count % 3 != 0 %>
+          <div class="medium-4 columns"></div>
+        <% end %>
+      <% end %>
+  <% end %>
+    </div>
   </ul>
 <% end %>

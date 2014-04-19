@@ -1,42 +1,30 @@
 <%= simple_form_for @student do |f| %>
   <div class="row">
-    <div class="small-0 large-6 columns">
-      <%= f.input :first_name, label: 'First Name' %>
+    <div class="medium-1 columns"><br></div>
+    <div class="small-12 medium-5 columns">
+      <div class="student-photo_preview">
+        <img id="img_prev" class="default_background" src="<%= @student.student_photo.url %>" alt="Preview" />
+      </div>
     </div>
-    <div class="small-0 large-6 columns">
-      <%= f.input :last_name, label: 'Last Name' %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="small-0 large-6 columns">
-      <%= f.input :nickname %>
-    </div>
-    <div class="small-0 large-6 columns">
-      <%= f.input :dob, label: 'Date of Birth' %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="small-0 large-12 columns">
-      <%= f.association :school, collection: current_user.schools,
-    include_blank: false  %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="small-0 large-12 columns">
+    <div class="small-12 medium-5 columns">
+      <div class="row">
+         <div class="small-6 columns"><%= f.input :first_name, label: 'First Name' %></div>
+         <div class="small-6 columns"><%= f.input :last_name, label: 'Last Name' %></div>
 
+      </div>
+
+      <%= f.input :nickname %>
+      <%= f.input :dob, label: 'Date of Birth' %>
+      <%= f.association :school, collection: current_user.schools,include_blank: false  %>
       <%= f.input :student_photo, label: "Upload Student Photo", input_html: {onchange:"readURL(this);"} %>
     </div>
+    <div class="medium-1 columns"><br></div>
   </div>
 
-<footer>
-      <img id="img_prev" class=".student-photo img" src="<%=  %>" alt="Preview" />
-<br>
-
-<br>
-
+<footer><br><br>
   <%= f.button :submit, "Submit" %>
 <% end %>
-  <p><%= link_to 'Back', root_path %></p>
+  <p><%= link_to 'Back', students_path %></p>
 </footer>
 
 

@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @student_pool = current_user.student_pool
+    @student_pool = current_user.student_pool.first
   end
   def new
     @student = Student.new
