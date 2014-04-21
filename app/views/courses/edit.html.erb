@@ -1,15 +1,60 @@
 <h1>Edit an Existing Class</h1>
 
-<%= simple_form_for @course do |f| %>
-  <%= f.input :subject%>
-  <%= f.input :school_year, label: "School Year" %>
-  <%= f.input :period %>
-  <%= f.input :start_date, label: "Start" %>
-  <%= f.input :end_date, label: "End" %>
-  <%= f.input :status, collection: Course::STATUSES, :include_blank => false %>
+<div class="row">
+  <div class="small-4 columns">
+    <%= simple_form_for @course do |f| %>
+      <%= f.input :subject%>
+      <div class="row">
+        <div class="small-6 columns"><%= f.input :school_year, label: "School Year" %></div>
+        <div class="small-6 columns"><%= f.input :period %></div>
+      </div>
+      <div class="row">
+        <div class="small-6 columns"><%= f.input :rows, label: "Rows in Classroom" %></div>
+        <div class="small-6 columns"><%= f.input :columns, label: "Students Per Row" %></div>
+      </div>
+
+      <%= f.input :status, collection: Course::STATUSES, :include_blank => false %>
+      <%= f.input :start_date, label: "Start", input_html: {class: "medium-4 columns "} %>
+      <%= f.input :end_date, label: "End", input_html: {class: "medium-4 columns "} %>
+
+    </div>
+
+  <div class="small-8 columns">
+    <ul>
+      <div class="row seatingchart">
+        <%= f.simple_fields_for :enrollments do |e| %>
+          <%= e.input :seat,  input_html: { value: e.object.seat },  as: :hidden%>
+          <%= e.input :id,  input_html: { value: e.object.id },  as: :hidden%>
+          <% label = "Seat " + e.object.seat.to_s %>
+
+          <li>
+            <%if  e.object.seat % e.object.course.rows == 0 && e.object.seat > 0%>
+              </div>
+              <!-- Div is opened before loop and closed after -->
+              <div class="row">
+            <% end %>
+            <% class_string = "small-" + (12/e.object.course.columns).to_s + " columns" %>
+              <div class="<%= class_string %>">
+                <%= e.input :student_id,
+                  collection: @student_pool,
+                  label_method: :full_name,
+                  value_method: :id,
+                  label: label,
+                  include_blank: false %>
+              </div>
+            </li>
+
+        <% end %>
+      </div>
+    </ul>
+  </div>
+</div>
+
+  <footer>
+    <%= f.button :submit, "Modify" %>
+  </footer>
+<% end %>
 
 <footer>
-  <%= f.button :submit, "Modify" %>
-<% end %>
   <p><%= link_to 'Back', root_path %></p>
 </footer>

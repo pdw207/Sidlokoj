@@ -3,12 +3,16 @@ h2, h1, .center, table, footer {
   text-align: center;
 }
 
-h1 {
-  font-size: 2em;
+p, a, .top-bar-section ul li > a{
+  font-family: 'Ubuntu Mono';
 }
 
-h2{
-  font-size: 1.5em;
+table td a{
+  font-family: 'arial';
+}
+
+h1, h2, h3{
+  font-family: 'Roboto', sans-serif;
 }
 /*Text Algin all Elements in a Table*/
 table thead tr th, table thead tr td, table tfoot tr th, table tfoot tr td{
@@ -36,11 +40,22 @@ table.informational{
   margin-top: -5%;
 }
 
+test_body{
+  background-image: url("classroom_light.jpg");
+  background-repeat:no-repeat;
+  background-position: center center;
+    background-size: auto 150%;
+    font-size: 2em;
+    h2 {
+    font-family: 'Roboto', sans-serif;
+    }
+}
 
-
-
-
-
+.top-bar{
+  zoom: 1;
+  filter: alpha(opacity=50);
+  opacity: 0.5;
+}
 
 
 

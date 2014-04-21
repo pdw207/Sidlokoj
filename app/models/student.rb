@@ -4,7 +4,11 @@ class Student < ActiveRecord::Base
 
 
   belongs_to :school
+  has_many :enrollments
 
   mount_uploader :student_photo, StudentPhotoUploader
 
+  def full_name
+    self.first_name + " " + self.last_name
+  end
 end

@@ -21,8 +21,9 @@ feature 'User Sign Up and Sign In', %q{
   scenario 'an unregistered user completes sign_up form' do
 
     starting_user_count = User.count
-    visit root_path
-    click_link 'Sign Up'
+
+    visit new_user_registration_path
+
     fill_in 'First Name', with: "Mary"
     fill_in 'Last Name', with: "Undershill"
     fill_in 'Email', with: "undershill@gmail.com"
@@ -30,16 +31,16 @@ feature 'User Sign Up and Sign In', %q{
     fill_in 'user_password', with: "12345678"
     fill_in 'user_password_confirmation', with: "12345678"
     click_button 'Sign Up'
-
     expect(page).to have_content('Awesome. You are now registered. Now you need to create a classroom.')
     expect(User.count).to eq(starting_user_count + 1)
 
   end
 
+
   scenario 'a user does not supply all information in the sign_up form' do
     starting_user_count = User.count
 
-    visit root_path
+    visit new_user_registration_path
     click_link 'Sign Up'
     click_button 'Sign Up'
 
@@ -52,7 +53,6 @@ feature 'User Sign Up and Sign In', %q{
 
   # Sign In
   scenario 'a user signs into the site successfully' do
-
     user = FactoryGirl.create(:user)
     sign_in_as(user)
     expect(page).to have_content('Nice to See you Again.')

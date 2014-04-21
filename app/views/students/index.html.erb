@@ -1,6 +1,6 @@
 
 
-<%unless @student_pool.empty?%>
+
 
   <h1>Students</h1>
 
@@ -10,6 +10,7 @@
     </div>
   </div>
 
+<%unless @student_pool.nil?%>
 
   <ul id="student-list">
 
@@ -26,7 +27,7 @@
                  <%= image_tag student.student_photo.url %>
                 <% end %>
               </div>
-              <h2 class='student-name'><%=short_name(student)%></h2>
+              <h3 class='student-name'><%=short_name(student)%></h3>
           </li>
         </div>
         <!-- If doesn't complete a row just add a filler to float last student left -->
