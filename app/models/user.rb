@@ -32,12 +32,7 @@ class User < ActiveRecord::Base
   end
 
   def student_pool
-    pool = []
-
-    schools.each do |school|
-      pool << school.students
-    end
-    pool
+    Student.where(school_id: school_ids)
   end
 
   def available_school_principals

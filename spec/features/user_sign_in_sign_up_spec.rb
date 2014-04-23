@@ -24,13 +24,16 @@ feature 'User Sign Up and Sign In', %q{
 
     visit new_user_registration_path
 
-    fill_in 'First Name', with: "Mary"
-    fill_in 'Last Name', with: "Undershill"
-    fill_in 'Email', with: "undershill@gmail.com"
-    choose('Teacher')
-    fill_in 'user_password', with: "12345678"
-    fill_in 'user_password_confirmation', with: "12345678"
-    click_button 'Sign Up'
+    within "#new_user" do
+      fill_in 'First Name', with: "Mary"
+      fill_in 'Last Name', with: "Undershill"
+      fill_in 'Email', with: "undershill@gmail.com"
+      choose('Teacher')
+      fill_in 'user_password', with: "12345678"
+      fill_in 'user_password_confirmation', with: "12345678"
+      click_on 'Sign Up'
+    end
+
     expect(page).to have_content('Awesome. You are now registered. Now you need to create a classroom.')
     expect(User.count).to eq(starting_user_count + 1)
 

@@ -16,19 +16,14 @@ feature 'Assign Students to Course', %q{
 
     # The teacher of the course is a member of the school
     course.teacher.schools << school
-
     sign_in_as(course.teacher)
     visit edit_course_path(course)
-    select "John", from: 'seat_1'
-    select "Dale", from: 'seat_2'
-    select "Joe", from: 'seat_3'
+
+    select "Kyle Munchkin the 1", from: "course_enrollments_attributes_0_student_id"
     click_button 'Modify'
     expect(page).to have_content('Class Updated Successfully')
-    expect(chemistry.students.count).to eq(3)
+    expect(course.students.count).to eq(1)
 
   end
 
-  scenario 'I can remove a student from an existing classoom'
-  scenario 'I can add a student to a new classroom'
-  scenario 'I can delete a student from a new classroom'
 end

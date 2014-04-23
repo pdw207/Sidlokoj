@@ -56,7 +56,6 @@ feature 'Adding Students and Classrooms', %q{
 
     visit edit_course_path(course)
     select "Inactive", from: 'Status'
-    save_and_open_page
     select student.full_name, from: 'course_enrollments_attributes_0_student_id'
     click_button 'Modify'
     expect(page).to have_content('Your wish is my command!')
@@ -65,15 +64,17 @@ feature 'Adding Students and Classrooms', %q{
   scenario 'Teacher Can Edit a Class Unsuccesfully' do
     course = FactoryGirl.create(:course)
     teacher = course.teacher
-
     sign_in_as(teacher)
-
     visit edit_course_path(course)
-    fill_in 'Subject', with: ""
-    click_button 'Modify'
 
-    expect(page).to have_content("Take a look at what you got. Something went wrong.")
+    within "#course_modify" do
+      find(:css,"input").click
+      save_and_open_page
+    end
 
+    within ".alert-box" do
+      expect(page).to have_content("Take a look at what you got. Something went wrong.")
+    end
   end
 
   scenario 'teacher can create a new student Successfully' do
