@@ -31,12 +31,10 @@ class CoursesController < ApplicationController
     matrix_size = course_params[:enrollments_attributes].count
 
     if course_size > matrix_size
-      (course_size - matrix_size).times {|i| @course.enrollments.build(seat: i)}
+      (course_size - matrix_size).times {|i| @course.enrollments.build(seat: (i+1))}
     else
-      # course_params[:enrollments_attributes].keys.last(matrix_size-course_size).each do |e|
-      # end
-    end
 
+    end
     @student_pool = current_user.student_pool
 
     if @course.update(course_params)

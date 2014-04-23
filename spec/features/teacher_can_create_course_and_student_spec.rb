@@ -51,7 +51,10 @@ feature 'Adding Students and Classrooms', %q{
 
   scenario 'Teacher Can Edit a Class Successfully' do
     course = FactoryGirl.create(:course)
-    student = FactoryGirl.create(:student)
+    school = FactoryGirl.create(:school)
+    student = FactoryGirl.create(:student, school: school)
+    school.teachers << course.teacher
+
     sign_in_as(course.teacher)
 
     visit edit_course_path(course)
@@ -67,14 +70,10 @@ feature 'Adding Students and Classrooms', %q{
     sign_in_as(teacher)
     visit edit_course_path(course)
 
-    within "#course_modify" do
-      find(:css,"input").click
-      save_and_open_page
-    end
+   click_button "Modify"
 
-    within ".alert-box" do
+
       expect(page).to have_content("Take a look at what you got. Something went wrong.")
-    end
   end
 
   scenario 'teacher can create a new student Successfully' do

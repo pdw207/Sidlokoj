@@ -1,24 +1,24 @@
 
 <% unless @requests.empty? %>
-  <h2>Requests to Join a School</h2>
-  <p class = "help_notice">You need to wait for a Principal to approve you before those students become available.</p class = "help_notice">
+<h2>Requests to Join a School</h2>
+<p class = "help_notice">You need to wait for a Principal to approve you before those students become available.</p class = "help_notice">
   <table>
-  <tr>
-    <td>Name</td>
-    <td>Location</td>
-    <td>Created</td>
-    <td>Status</td>
-  </tr>
-  <% @requests.each do |request| %>
+    <tr>
+      <td>Name</td>
+      <td>Location</td>
+      <td>Created</td>
+      <td>Status</td>
+    </tr>
+    <% @requests.each do |request| %>
     <tr>
       <td><%= request.principal.principal_school.name %></td>
       <td><%= request.principal.principal_school.location%></td>
       <td><%= request.created_at.strftime("%m/%d/%Y") %></td>
       <td><%= request.status %> by <%= request.principal.full_name %></td>
     </tr>
-  <% end %>
+    <% end %>
   </table>
-<% end %>
-<footer>
-  <%= link_to 'Request to Join a School', new_request_path unless current_user.admin %>
-</footer>
+  <% end %>
+  <footer>
+    <%= link_to 'Request to Join a School', new_request_path unless current_user.admin %>
+  </footer>
