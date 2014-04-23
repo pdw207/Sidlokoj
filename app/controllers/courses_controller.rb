@@ -18,16 +18,29 @@ class CoursesController < ApplicationController
     end
   end
 
+
   def edit
     @course =  Course.find(params[:id])
+    (@course.size - @course.enrollments.length).times {|i| @course.enrollments.build(seat: i)}
+    @student_pool = current_user.student_pool
   end
 
   def update
     @course =  Course.find(params[:id])
+    course_size = course_params[:rows].to_i * course_params[:columns].to_i
+    matrix_size = course_params[:enrollments_attributes].count
+
+    if course_size > matrix_size
+      (course_size - matrix_size).times {|i| @course.enrollments.build(seat: (i+1))}
+    else
+
+    end
+    @student_pool = current_user.student_pool
 
     if @course.update(course_params)
       redirect_to root_path, notice: 'Your wish is my command!'
     else
+
       flash.now[:warning] = 'Take a look at what you got. Something went wrong.'
       render 'edit'
     end
@@ -36,6 +49,17 @@ class CoursesController < ApplicationController
   private
 
   def course_params
-    params.require(:course).permit(:id, :subject, :school_year, :period, :start_date, :end_date, :status)
+    params.require(:course).permit(
+      :id,
+      :subject,
+      :school_year,
+      :period,
+      :start_date,
+      :end_date,
+      :status,
+      :rows,
+      :columns,
+      enrollments_attributes: [:id, :seat, :student_id]
+      )
   end
 end

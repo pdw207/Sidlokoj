@@ -1,14 +1,16 @@
 <h1>Join a School</h1>
-<p class="help_notice">Being a member of a school allows you access to a pool of students.</p>
+<div class="row">
+  <div class="small-4 small-centered columns">
+    <p>Being a member of a school allows you access to a pool of students.</p>
 
-<%= simple_form_for @request do |f| %>
-  <%= f.association :principal,
-    collection: current_user.available_school_principals,
-    label: 'School Principal',
-    label_method: :full_name,
-    include_blank: false %>
-  <footer>
-    <%= f.button :submit, 'Send Request' %>
-<% end %>
-  <p><%= link_to 'Back', root_path %></p>
-  </footer>
+    <%= simple_form_for @request do |f| %>
+      <%= f.association :principal,
+        collection: current_user.available_school_principals,
+        label: 'School Principal',
+        label_method: :full_name,
+        include_blank: false %>
+        <%= f.button :submit, 'Send Request' %>
+    <% end %>
+      <p><%= link_to 'Back', root_path %></p>
+  </div>
+</div>

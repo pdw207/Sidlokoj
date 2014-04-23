@@ -14,6 +14,14 @@ describe Student do
 
   context 'associations' do
     it{ should belong_to(:school)}
+    it{ should have_many(:enrollments)}
+  end
+
+  context 'methods' do
+    it '#full_name' do
+      student = FactoryGirl.build(:student, first_name: "Barry", last_name:"JaJa")
+      expect(student.full_name).to eq("Barry JaJa")
+    end
   end
 
 end

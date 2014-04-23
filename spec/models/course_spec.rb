@@ -7,6 +7,12 @@ describe Course do
     it {should have_valid(:subject).when("Chemistry", "Bio", "AP-Lit", "Intro to Python")}
     it {should_not have_valid(:subject).when(*blank)}
 
+    it {should have_valid(:rows).when(1,6,10)}
+    it {should_not have_valid(:rows).when(*blank, "six")}
+
+    it {should have_valid(:columns).when(1,6,10)}
+    it {should_not have_valid(:columns).when(*blank, "four")}
+
     it {should ensure_inclusion_of(:status).in_array(Course::STATUSES)}
     it {should_not have_valid(:status).when(*blank, "Banana")}
 
@@ -14,6 +20,8 @@ describe Course do
 
   context 'associations' do
     it{ should belong_to(:teacher)}
+    it{ should have_many(:enrollments)}
+    it{ should have_many(:students).through(:enrollments)}
   end
 
   context 'methods' do
@@ -31,6 +39,10 @@ describe Course do
 
     end
 
+    it 'provides total seats' do
+      small_class = FactoryGirl.build(:course, rows: 3, columns: 5)
+      expect(small_class.size).to eq(15)
+    end
   end
 
 end

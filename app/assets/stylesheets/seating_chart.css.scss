@@ -1,15 +1,19 @@
  #student-list{
   li{
     list-style-type: none;
-    width:200px;
     text-align: center;
-    margin: 0 auto;
   }
 }
 
 .student-photo img{
-  border-radius: 160px;
+  border-radius: 180px;
   width: 270px;
+}
+
+
+.student-photo_preview img{
+  border-radius: 180px;
+  width: 340px;
 }
 
 .student-name{
@@ -36,4 +40,17 @@ label.file.optional.control-label{
  }
 }
 
+li.student{
+  display: inline-block;
+}
+
+.default_background{
+  background-color: grey;
+  width: 340px;
+  height: 340px;
+}
+
+li {
+  list-style-type: none;
+}
 

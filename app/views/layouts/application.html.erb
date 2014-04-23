@@ -7,6 +7,8 @@
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400italic' rel='stylesheet' type='text/css'>
     <%= csrf_meta_tags %>
   </head>
 
@@ -18,14 +20,16 @@
   <body>
 
   <div class="row">
-    <div class="small-2 columns"><br></div>
-    <div class="small-8 columns">
+    <div class="small-12 columns">
       <%= yield %>
     </div>
-    <div class="small-2 columns"><br></div>
   </div>
 
-
     <%= javascript_include_tag "application" %>
+    <%= yield :extra_footer %>
+    <script>
+      $(document).foundation();
+    </script>
+
   </body>
 </html>

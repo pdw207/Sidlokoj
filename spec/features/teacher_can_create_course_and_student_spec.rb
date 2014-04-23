@@ -23,6 +23,8 @@ feature 'Adding Students and Classrooms', %q{
     fill_in 'Subject', with: "Physics"
     fill_in 'School Year', with: "Fall 2010"
     fill_in 'Period', with: "2"
+    fill_in 'Rows in Classroom', with: "5"
+    fill_in 'Students Per Row', with: "5"
     # Start Date
     select "2013", from: 'course_start_date_1i'
     select "April", from: 'course_start_date_2i'
@@ -49,29 +51,29 @@ feature 'Adding Students and Classrooms', %q{
 
   scenario 'Teacher Can Edit a Class Successfully' do
     course = FactoryGirl.create(:course)
+    school = FactoryGirl.create(:school)
+    student = FactoryGirl.create(:student, school: school)
+    school.teachers << course.teacher
 
     sign_in_as(course.teacher)
 
     visit edit_course_path(course)
     select "Inactive", from: 'Status'
+    select student.full_name, from: 'course_enrollments_attributes_0_student_id'
     click_button 'Modify'
-
     expect(page).to have_content('Your wish is my command!')
-
   end
 
   scenario 'Teacher Can Edit a Class Unsuccesfully' do
     course = FactoryGirl.create(:course)
     teacher = course.teacher
-
     sign_in_as(teacher)
-
     visit edit_course_path(course)
-    fill_in 'Subject', with: ""
-    click_button 'Modify'
 
-    expect(page).to have_content("Take a look at what you got. Something went wrong.")
+   click_button "Modify"
 
+
+      expect(page).to have_content("Take a look at what you got. Something went wrong.")
   end
 
   scenario 'teacher can create a new student Successfully' do

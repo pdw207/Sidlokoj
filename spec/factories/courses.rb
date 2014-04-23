@@ -7,6 +7,9 @@ FactoryGirl.define do
     period 6
     start_date "2014-02-01"
     end_date "2014-05-20"
+    rows 1
+    columns 1
+    status "Active"
     teacher
   end
 end

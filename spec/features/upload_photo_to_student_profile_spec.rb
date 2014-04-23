@@ -36,16 +36,6 @@ feature 'Uploading Student Photos', %q{
     expect(page).to have_content('Hey, check the form again')
 
   end
-  scenario 'teacher can unsuccessfully upload a photo based on file size' do
 
-    # sign_in_as(FactoryGirl.create(:teacher))
-    # visit new_student_path
-    # fill_in 'First Name', with: "Lydia "
-    # fill_in 'Last Name', with: "Gonzales"
-    # attach_file 'Student Photo', Rails.root.join('spec/file_fixtures/invalid_girl_size.jpg')
-    # click_button 'Submit'
-
-    # expect(page).to have_content('Hey, check the form again')
-  end
 
 end

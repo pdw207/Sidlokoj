@@ -5,18 +5,20 @@
     <td>Name</td>
     <td>School Year</td>
     <td>Period</td>
-    <td>Action</td>
+    <td>Students</td>
   </tr>
+
   <% @courses.each do |course| %>
       <tr>
         <td><%= link_to course.subject || "", edit_course_path(course) %></td>
         <td><%= link_to course.school_year || "", edit_course_path(course) %> </td>
         <td><%= link_to course.period || "", edit_course_path(course)  %> </td>
-        <td><%= link_to 'edit', edit_course_path(course)  %> </td>
+        <td><%= link_to course.students.count || "", edit_course_path(course) %></td>
       </tr>
   <% end %>
   </table>
 <% end %>
+
 <footer>
   <%= link_to 'Create a New Class', new_course_path%>
 </footer>
