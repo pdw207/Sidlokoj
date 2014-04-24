@@ -22,20 +22,14 @@ class CoursesController < ApplicationController
   def edit
     @course =  Course.find(params[:id])
     (@course.size - @course.enrollments.length).times {|i| @course.enrollments.build(seat: i)}
-    @student_pool = current_user.student_pool
+    @student_pool = current_user.student_pool.order(:last_name)
   end
 
   def update
     @course =  Course.find(params[:id])
-    course_size = course_params[:rows].to_i * course_params[:columns].to_i
-    matrix_size = course_params[:enrollments_attributes].count
-
-    if course_size > matrix_size
-      (course_size - matrix_size).times {|i| @course.enrollments.build(seat: (i+1))}
-    else
-
-    end
-    @student_pool = current_user.student_pool
+    @student_pool = current_user.student_pool.order(:last_name)
+    @enrollments = @course.enrollments
+    binding.pry
 
     if @course.update(course_params)
       redirect_to root_path, notice: 'Your wish is my command!'
@@ -47,6 +41,10 @@ class CoursesController < ApplicationController
   end
 
   private
+
+  def update_course_and_seating
+    @course.update(course_params)
+  end
 
   def course_params
     params.require(:course).permit(

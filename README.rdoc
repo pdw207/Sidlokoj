@@ -1,6 +1,26 @@
 == README
 
-Seating Application
 
-Teacher can upload students with photos and arrange them in a classroom.
+Seating Chart Tool
+------------------
+Sidlokoj, or seating in Esperanto, is a seating chart tool to allow teachers to create dynamic seating charts for their classrooms. Teachers can create classrooms and arrange students within the available seats in the classroom. Teachers can also share student profiles through principals that have the responsibility of reviewing and approving invitation requests.
+
+Demo
+------------
+Give it a test drive at sidlokoj.heroku.com using the sample login information.
+
+Installation Instructions
+------------------------
+1. Clone the repo
+2. Rename database.yml.example to database.yml file found in the config directory and update with appropriate server and user information
+3. Rename .env_sample to .env and update with appropriate credentials. You may have to register for amazon AWS service.
+4. Create, migrate and run your app and have fun!
+
+Points of Interest
+------------------
+1. HTML5 Drag and Drop
+2. Devise Authorization
+3. CarrierWave File Upload
+4. Capybara Test Driven Development
+5. Factory Girl Fixtures and Factories
 

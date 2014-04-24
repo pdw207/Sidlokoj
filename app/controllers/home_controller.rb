@@ -7,7 +7,7 @@ class HomeController < ApplicationController
     @schools = current_user.schools
     @student_pool = current_user.student_pool
     @requests = current_user.submitted_requests.where(status: "Pending")
-    @courses = Course.active_courses_for(current_user)
+    @courses = Course.active_courses_for(current_user).includes(:students)
 
   end
 

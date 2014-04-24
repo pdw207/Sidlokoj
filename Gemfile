@@ -27,6 +27,7 @@ group :development, :test do
     gem 'pry-rails'
     gem 'quiet_assets'
     gem 'factory_girl_rails'
+    # gem 'rack-mini-profiler'
 end
 
 group :test do
