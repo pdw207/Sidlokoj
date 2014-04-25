@@ -12,29 +12,32 @@ feature 'Assign Students to Course', %q{
   scenario 'I can add a student to an existing classroom from the student pool' do
 
     enrollment = FactoryGirl.create(:enrollment)
-
-    sign_in_as(enrollment.course.teacher)
+    teacher = enrollment.course.teacher
+    TeacherAssignment.create(teacher: teacher, school:enrollment.student.school)
+    sign_in_as(teacher)
     visit edit_course_path(enrollment.course)
-    select "Kyle Munchkin the 1", from: "course_enrollments_attributes_0_student_id"
-    click_button 'Modify'
-    expect(page).to have_content('Class Updated Successfully')
-    expect(course.students.count).to eq(1)
 
+    select enrollment.student.full_name, from: "course_enrollments_attributes_0_student_id"
+    click_button 'Modify'
+    expect(page).to have_content('Your wish is my command!')
   end
+
   scenario 'I can switch the placement of two students' do
     course = FactoryGirl.create(:course)
     # Same course and same teacher 2 students
     kyle = FactoryGirl.create(:enrollment, course: course, seat: 0)
     kyle_2 = FactoryGirl.create(:enrollment, course: course, seat: 1)
 
+    TeacherAssignment.create(teacher: course.teacher, school:kyle.student.school)
+    TeacherAssignment.create(teacher: course.teacher, school:kyle_2.student.school)
+
     sign_in_as(course.teacher)
     visit edit_course_path(course)
 
-    select kyle.student.full_name, from: "course_enrollments_attributes_0_student_id"
-    select kyle_2.student.full_name, from: "course_enrollments_attributes_1_student_id"
+    select kyle.student.full_name, from: "course_enrollments_attributes_1_student_id"
+    select kyle_2.student.full_name, from: "course_enrollments_attributes_0_student_id"
     click_button 'Modify'
-    expect(page).to have_content('Class Updated Successfully')
-    expect(course.students.count).to eq(2)
+    expect(page).to have_content('Your wish is my command!')
 
   end
 end

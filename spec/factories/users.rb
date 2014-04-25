@@ -13,6 +13,7 @@ FactoryGirl.define do
       admin true
     end
 
+
     factory :principal, traits: [:isprincipal]
     factory :teacher, traits: [:isteacher]
   end
