@@ -29,7 +29,6 @@ class CoursesController < ApplicationController
     @course =  Course.find(params[:id])
     @student_pool = current_user.student_pool.order(:last_name)
     @enrollments = @course.enrollments
-    binding.pry
 
     if @course.update(course_params)
       redirect_to root_path, notice: 'Your wish is my command!'
