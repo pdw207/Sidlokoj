@@ -1,0 +1,20 @@
+<% unless @courses.empty? %>
+  <h2>Classes</h2>
+  <table>
+  <tr>
+    <td>Name</td>
+    <td>School Year</td>
+    <td>Period</td>
+    <td>Students</td>
+  </tr>
+
+  <% @courses.each do |course| %>
+      <tr>
+        <td><%= link_to course.subject || "", edit_course_path(course) %></td>
+        <td><%= link_to course.school_year || "", edit_course_path(course) %> </td>
+        <td><%= link_to course.period || "", edit_course_path(course)  %> </td>
+        <td><%= link_to course.students.count || "", edit_course_path(course) %></td>
+      </tr>
+  <% end %>
+  </table>
+<% end %>

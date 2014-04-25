@@ -1,4 +1,4 @@
-<h1>Edit an Existing Class<br></h1>
+<h1><%= @course.subject %><br></h1>
 <div class="row">
   <%= simple_form_for @course do |f| %>
 
@@ -37,26 +37,29 @@
 
       <ul class="small-block-grid-<%= @course.columns %>">
         <% counter = 0 %>
-        <%= f.simple_fields_for :enrollments do |e| %>
+        <% @course.enrollments.order(:seat) %>
+        <%= f.simple_fields_for :enrollments, @enrollments do |e| %>
         <li>
           <%= e.input :seat,  input_html: { value: e.object.seat },  as: :hidden%>
-          <%= e.input :id,  input_html: { value: e.object.id },  as: :hidden%>
+
           <% if e.object.student.nil? %>
-            <%= image_tag("http://placehold.it/100x100&text=Seat", class: "medium-photo photo-draggable", draggable: true ,data: { seat: e.object.seat }) %>
+            <%= image_tag("http://placehold.it/100x100&text=Seat", class: "medium-photo photo-draggable", draggable: true ,data: { seat: counter }) %>
           <% else %>
-            <%= image_tag(e.object.student.student_photo.url, class: "medium-photo photo-draggable", draggable: true ,data: { seat: e.object.seat, student_id: e.object.student_id  }) %>
+            <%= image_tag(e.object.student.student_photo.url, class: "medium-photo photo-draggable", draggable: true ,data: { seat: counter, student_id: e.object.student_id  }) %>
           <% end %>
-          <% label = "Seat " + (counter+=1).to_s %>
+          <% label = "Seat #{e.object.seat}"%>
+          <% counter+=1 %>
           <%= e.association :student,
           collection: @student_pool,
           label_method: :full_name,
           value_method: :id,
-          label: label , as: :hidden%>
+          label: label %>
         </li>
         <% end %>
       </ul>
-
+    <footer>
       <%= f.button :submit, "Modify" %>
+    </footer>
     </div>
   </div>
   <% end %>
@@ -76,8 +79,12 @@
 
 <%content_for :extra_footer do %>
 <script>
+  $(function() {
+      // Add listeners on all photos
+      addListeners();
+      addHideButton();
 
-
+  })
 </script>
 <% end %>
 

@@ -50,30 +50,12 @@ feature 'Adding Students and Classrooms', %q{
   end
 
   scenario 'Teacher Can Edit a Class Successfully' do
-    course = FactoryGirl.create(:course)
-    school = FactoryGirl.create(:school)
-    student = FactoryGirl.create(:student, school: school)
-    school.teachers << course.teacher
-
-    sign_in_as(course.teacher)
-
-    visit edit_course_path(course)
+    enrollment = FactoryGirl.create(:enrollment)
+    sign_in_as(enrollment.course.teacher)
+    visit edit_course_path(enrollment.course)
     select "Inactive", from: 'Status'
-    select student.full_name, from: 'course_enrollments_attributes_0_student_id'
     click_button 'Modify'
     expect(page).to have_content('Your wish is my command!')
-  end
-
-  scenario 'Teacher Can Edit a Class Unsuccesfully' do
-    course = FactoryGirl.create(:course)
-    teacher = course.teacher
-    sign_in_as(teacher)
-    visit edit_course_path(course)
-
-   click_button "Modify"
-
-
-      expect(page).to have_content("Take a look at what you got. Something went wrong.")
   end
 
   scenario 'teacher can create a new student Successfully' do

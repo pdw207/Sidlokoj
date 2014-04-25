@@ -17,7 +17,7 @@ class Course < ActiveRecord::Base
     where(status: "Active", teacher: user)
   end
 
-  def size
-    self.rows * self.columns
+  def class_size
+    rows * columns
   end
 end

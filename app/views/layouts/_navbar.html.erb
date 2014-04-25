@@ -25,8 +25,12 @@
             <li><%= link_to 'Add Students', new_student_path %></li>
           </ul>
         </li>
-        <li><%= link_to 'School Request', new_request_path %></li>
-        <li><%= link_to 'New Class', new_course_path %></li>
+        <li class="has-dropdown"><%= link_to 'Classes', courses_path %>
+          <ul class="dropdown">
+            <li><%= link_to 'Classes', courses_path %></li>
+            <li><%= link_to 'New Class', new_course_path %></li>
+          </ul>
+        </li>
       <% end %>
     </ul>
 

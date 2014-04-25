@@ -41,7 +41,7 @@ describe Course do
 
     it 'provides total seats' do
       small_class = FactoryGirl.build(:course, rows: 3, columns: 5)
-      expect(small_class.size).to eq(15)
+      expect(small_class.class_size).to eq(15)
     end
   end
 

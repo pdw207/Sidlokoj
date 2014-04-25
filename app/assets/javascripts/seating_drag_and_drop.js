@@ -1,10 +1,12 @@
-$(function() {
-    $('#hide').click(function(e) {
-        e.preventDefault();
-        $('#sidebar').hide( "slow");
-        $('#seating').attr('class', "small-12 columns");
-    });
 
+    function addHideButton(){
+
+      $('#hide').click(function(e) {
+          e.preventDefault();
+          $('#sidebar').hide( "slow");
+          $('#seating').attr('class', "small-12 columns");
+      });
+    }
 
     function addListeners(){
       var dragSrcEl;
@@ -22,8 +24,7 @@ $(function() {
       });
     };
 
-    // Add listeners on all photos
-    addListeners();
+
 
     // Set the source to null
     var dragSrcEl = null
@@ -107,4 +108,4 @@ $(function() {
       e.preventDefault();
       console.log("leave");
     }
-  })
+

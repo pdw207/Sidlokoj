@@ -61,6 +61,8 @@ test_body{
   border-radius: 100%;
   width: 140px;
   height: 140px;
+  padding-bottom: 10px;
+  padding-left: 10px;
 }
 
 .medium-photo {
@@ -73,5 +75,20 @@ test_body{
   height: 600px;
   width: 321px;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
+.alert-box{
+  width: 600px;
+  text-align: center;
+  border-radius: 0px;
+  margin: 20px;
+  margin: 15px auto 0;
+}
+
+nav.top-bar{
+  z-index: 20;
+}
+.content{
+  margin-bottom: 200px;
+}

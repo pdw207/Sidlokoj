@@ -6,7 +6,7 @@ Sidlokoj::Application.routes.draw do
 
   resources :students, only: [:new, :create, :edit, :update, :index, :show]
 
-  resources :courses, only: [:new, :create, :edit, :update]
+  resources :courses, only: [:new, :create, :edit, :update, :index]
 
   namespace :admin do
     resources :schools, only: [:index, :create, :new, :edit, :update]

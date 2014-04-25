@@ -11,19 +11,30 @@ feature 'Assign Students to Course', %q{
 
   scenario 'I can add a student to an existing classroom from the student pool' do
 
-    school = FactoryGirl.create(:school_with_students)
-    course = FactoryGirl.create(:course)
+    enrollment = FactoryGirl.create(:enrollment)
 
-    # The teacher of the course is a member of the school
-    course.teacher.schools << school
-    sign_in_as(course.teacher)
-    visit edit_course_path(course)
-
+    sign_in_as(enrollment.course.teacher)
+    visit edit_course_path(enrollment.course)
     select "Kyle Munchkin the 1", from: "course_enrollments_attributes_0_student_id"
     click_button 'Modify'
     expect(page).to have_content('Class Updated Successfully')
     expect(course.students.count).to eq(1)
 
   end
+  scenario 'I can switch the placement of two students' do
+    course = FactoryGirl.create(:course)
+    # Same course and same teacher 2 students
+    kyle = FactoryGirl.create(:enrollment, course: course, seat: 0)
+    kyle_2 = FactoryGirl.create(:enrollment, course: course, seat: 1)
 
+    sign_in_as(course.teacher)
+    visit edit_course_path(course)
+
+    select kyle.student.full_name, from: "course_enrollments_attributes_0_student_id"
+    select kyle_2.student.full_name, from: "course_enrollments_attributes_1_student_id"
+    click_button 'Modify'
+    expect(page).to have_content('Class Updated Successfully')
+    expect(course.students.count).to eq(2)
+
+  end
 end

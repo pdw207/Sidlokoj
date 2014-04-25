@@ -1,5 +1,8 @@
 
 // Preview on Image Upload
+//by Ivan Baev
+//http://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded
+
 function readURL(input) {
   if (input.files && input.files[0]) {
 

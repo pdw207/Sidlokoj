@@ -2,6 +2,10 @@ class CoursesController < ApplicationController
 
    before_action :authenticate_user!
 
+  def index
+      @courses = Course.active_courses_for(current_user).includes(:students)
+  end
+
   def new
     @course = Course.new
   end
@@ -9,6 +13,8 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     @course.teacher_id = current_user.id
+
+    @course.class_size.times {|i| @course.enrollments.build(seat: i)} unless @course.rows.nil? || @course.columns.nil?
 
     if @course.save
       redirect_to root_path, notice: 'You have Successfully created a new class. Now you can add Students!'
@@ -21,14 +27,14 @@ class CoursesController < ApplicationController
 
   def edit
     @course =  Course.find(params[:id])
-    (@course.size - @course.enrollments.length).times {|i| @course.enrollments.build(seat: i)}
     @student_pool = current_user.student_pool.order(:last_name)
+    @enrollments = @course.enrollments.order(:seat)
   end
 
   def update
     @course =  Course.find(params[:id])
     @student_pool = current_user.student_pool.order(:last_name)
-    @enrollments = @course.enrollments
+    @enrollments = @course.enrollments.order(:seat)
 
     if @course.update(course_params)
       redirect_to root_path, notice: 'Your wish is my command!'
