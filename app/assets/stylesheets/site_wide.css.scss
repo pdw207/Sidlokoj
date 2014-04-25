@@ -65,14 +65,13 @@ test_body{
 
 .medium-photo {
   border-radius: 100%;
-  width: 160px;
-  height: 160px;
+  width: 200px;
 }
 
 
 .student_pool{
   height: 600px;
   width: 321px;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
